@@ -1,0 +1,27 @@
+.facilitator-container {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  border: "1px solid #ddd";
+  padding: "10px";
+  border-radius: "8px";
+  margin-bottom: "10px";
+}
+
+button {
+  margin-left: "10px";
+}
+
+form {
+  padding: "10px";
+  border: "1px solid #ccc";
+  border-radius: "8px";
+  margin-bottom: "20px";
+}

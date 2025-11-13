@@ -8,11 +8,13 @@ export default function NavBar() {
     <>
       <header>
         <Link to="/">
-          <img src="./books.png" alt="Book Buddy Logo" />
-          <p>Book Buddy</p>
+          <p>Home</p>
+        </Link>
+        <Link to="/login">
+          <p>Login</p>
         </Link>
         <nav>
-          <NavLink to="/">Books</NavLink>
+          {/* <NavLink to="/">Books</NavLink>
           {token ? (
             <>
               <NavLink to="/account">Account</NavLink>
@@ -22,7 +24,8 @@ export default function NavBar() {
             </>
           ) : (
             <NavLink to="/login">Login</NavLink>
-          )}
+          )} */}
+          <NavLink to="/facilitator">Facilitator</NavLink>
         </nav>
       </header>
     </>

@@ -19,7 +19,7 @@ export default function Register() {
     const password = formData.get("password");
     try {
       await register({ firstname, lastname, email, password });
-      navigate("/books");
+      navigate("/events");
     } catch (e) {
       setError(e.message);
     }
