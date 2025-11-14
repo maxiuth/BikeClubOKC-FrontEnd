@@ -1,4 +1,4 @@
-import { eventsHardCoded } from "./api.js";
+import { eventsHC } from "./api.js";
 
 // const API = import.meta.env.VITE_API;
 
@@ -13,7 +13,7 @@ export async function getEvents() {
   //     return [];
   //   }
 
-  return eventsHardCoded;
+  return eventsHC;
 }
 
 /** Fetches an event by ID from the API. */
@@ -26,7 +26,7 @@ export async function getEvent(id) {
   //     console.error(e);
   //     return null;
   //   }
-  return eventsHardCoded.find((event) => event.id === id);
+  return eventsHC.find((event) => event.id === id);
 }
 
 /**
@@ -54,7 +54,7 @@ export async function getEvent(id) {
 // }
 
 export async function createEvent(event) {
-  eventsHardCoded.push(event);
+  eventsHC.push(event);
 }
 
 /**
@@ -78,5 +78,8 @@ export async function createEvent(event) {
 // }
 
 export function deleteEvent(id) {
-  return eventsHardCoded.filter((event) => event.id !== id);
+  const index = eventsHC.findIndex((event) => event.id === id);
+  if (index !== -1) {
+    eventsHC.splice(index, 1); // remove 1 item at index
+  }
 }
