@@ -1,41 +1,9 @@
 import React from "react";
 import useQuery from "../api/useQuery.jsx";
 import { Link } from "react-router";
+import { eventsHardCoded } from "../api/api.js";
 
-export const eventsHardCoded = [
-  {
-    id: 1,
-    title: "Bike around the lake",
-    type: "Biking",
-    start_location: "Point A",
-    end_location: "Point B",
-    date: "2024-06-01",
-    start_time: "10:00 AM",
-    end_time: "12:00 PM",
-  },
-  {
-    id: 2,
-    title: "Bike around the park",
-    type: "Biking",
-    start_location: "Point B",
-    end_location: "Point C",
-    date: "2024-07-01",
-    start_time: "10:00 AM",
-    end_time: "12:00 PM",
-  },
-  {
-    id: 3,
-    title: "Bike on the trail",
-    type: "Biking",
-    start_location: "Point B",
-    end_location: "Point D",
-    date: "2024-06-027",
-    start_time: "10:00 AM",
-    end_time: "12:00 PM",
-  },
-];
-
-export default function Books() {
+export default function Events() {
   // Get list of books from API
   //   const { data: books, loading, error } = useQuery("/books", "books");
 
