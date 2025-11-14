@@ -1,39 +1,39 @@
-import React from "react";
-import useQuery from "../api/useQuery.jsx";
-import { Link } from "react-router";
-import { eventsHardCoded } from "../api/api.js";
+import { useEffect, useState } from "react";
+import { getEvents } from "../api/events.js";
+import EventList from "./EventList.jsx";
+import EventForm from "./EventForm.jsx";
+import { useAuth } from "../auth/AuthContext";
 
 export default function Events() {
-  // Get list of books from API
-  //   const { data: books, loading, error } = useQuery("/books", "books");
+  const [events, setEvents] = useState([]);
 
-  //   if (loading || !books) return <p>Loading...</p>;
-  //   if (error) return <p>Error loading books! {error}</p>;
+  const syncEvents = async () => {
+    const data = await getEvents();
+    setEvents(data);
+  };
+
+  useEffect(() => {
+    syncEvents();
+  }, []);
 
   return (
-    <ul>
-      {eventsHardCoded.map((event) => (
-        <Event event={event} key={event.id} />
-      ))}
-    </ul>
+    <>
+      <h1>Events</h1>
+      <EventList events={events} />
+      <EventForm syncEvents={syncEvents} />
+    </>
   );
 }
 
-function Event({ event }) {
-  return (
-    <li>
-      {/* <img src={book.coverimage} alt={`Cover for ${book.title}`} />
-      <Link to={`books/${book.id}`}>
-        <h2>{book.title}</h2>
-      </Link>
-      <h3>{book.author}</h3>
-      <p>{book.description}</p> */}
-      <h2>{event.title}</h2>
-      <p>Start location: {event.start_location}</p>
-      <p>End Location: {event.end_location}</p>
-      <p>Date: {event.date}</p>
-      <p>Start Time: {event.start_time}</p>
-      <p>End Time: {event.end_time}</p>
-    </li>
-  );
-}
+// function Event({ event }) {
+//   return (
+//     <li>
+//       <h2>{event.title}</h2>
+//       <p>Start location: {event.start_location}</p>
+//       <p>End Location: {event.end_location}</p>
+//       <p>Date: {event.date}</p>
+//       <p>Start Time: {event.start_time}</p>
+//       <p>End Time: {event.end_time}</p>
+//     </li>
+//   );
+// }

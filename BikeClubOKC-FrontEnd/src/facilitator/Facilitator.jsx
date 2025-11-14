@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Events from "../events/Events.jsx";
-import { eventsHardCoded } from "../api/api.js";
+import { eventsHC } from "../api/api.js";
 import "./facilitator.css";
 
 export default function Facilitator() {

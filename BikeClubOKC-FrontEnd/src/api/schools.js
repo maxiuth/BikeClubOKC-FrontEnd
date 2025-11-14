@@ -1,32 +1,15 @@
-import { eventsHC } from "./api.js";
+import { schoolsHC } from "./api.js";
 
 // const API = import.meta.env.VITE_API;
 
 /** Fetches an array of events from the API. */
-export async function getEvents() {
-  //   try {
-  //     const response = await fetch(API + "/activities");
-  //     const result = await response.json();
-  //     return result;
-  //   } catch (e) {
-  //     console.error(e);
-  //     return [];
-  //   }
-
-  return eventsHC;
+export async function getSchools() {
+  return schoolsHC;
 }
 
 /** Fetches an event by ID from the API. */
-export async function getEvent(id) {
-  //   try {
-  //     const response = await fetch(API + "/activities/" + id);
-  //     const result = await response.json();
-  //     return result;
-  //   } catch (e) {
-  //     console.error(e);
-  //     return null;
-  //   }
-  return eventsHC.find((event) => event.id === Number(id));
+export async function getSchool(id) {
+  return schoolsHC.find((school) => school.id === id);
 }
 
 /**
@@ -78,7 +61,7 @@ export async function createEvent(event) {
 // }
 
 export function deleteEvent(id) {
-  const index = eventsHC.findIndex((event) => event.id === Number(id));
+  const index = eventsHC.findIndex((event) => event.id === id);
   if (index !== -1) {
     eventsHC.splice(index, 1); // remove 1 item at index
   }
