@@ -1,16 +1,18 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { createEvent } from "../api/events.js";
-import { useAuth } from "../auth/AuthContext.jsx";
+import { eventsHC } from "../api/api.js";
 
 export default function EventForm({ syncEvents }) {
-  // const {token} = useAuth();
   const [error, setError] = useState(null);
 
-  const tryCreateEvent = async (formData) => {
+  const tryCreateEvent = async (e) => {
+    e.preventDefault();
     setError(null);
 
+    const formData = new FormData(e.target);
+
     const event = {
+      id: eventsHC.length + 1,
       title: formData.get("title"),
       type: formData.get("type"),
       start_location: formData.get("start_location"),
@@ -21,8 +23,9 @@ export default function EventForm({ syncEvents }) {
     };
 
     try {
-      await createEvent(event);
+      createEvent(event);
       syncEvents();
+      e.target.reset();
     } catch (e) {
       setError(e.message);
     }
@@ -31,11 +34,13 @@ export default function EventForm({ syncEvents }) {
   return (
     <>
       <h2>Create a new event for your school</h2>
-      <form action={tryCreateEvent}>
+
+      <form onSubmit={tryCreateEvent}>
         <label>
           Title
           <input type="text" name="title" required />
         </label>
+
         <label>
           Type
           <select name="type">
@@ -45,27 +50,36 @@ export default function EventForm({ syncEvents }) {
             <option value="Event">Event</option>
           </select>
         </label>
+
         <label>
           Start Location
           <input type="text" name="start_location" required />
         </label>
+
         <label>
           End Location
           <input type="text" name="end_location" required />
         </label>
+
         <label>
           Date
           <input type="date" name="date" required />
         </label>
+
         <label>
           Start Time
           <input type="time" name="start_time" required />
         </label>
+
         <label>
           End Time
           <input type="time" name="end_time" required />
         </label>
+
+        <button type="submit">Create Event</button>
       </form>
+
+      {error && <p role="alert">{error}</p>}
     </>
   );
 }

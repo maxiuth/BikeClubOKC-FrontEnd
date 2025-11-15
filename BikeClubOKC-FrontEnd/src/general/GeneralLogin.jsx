@@ -11,7 +11,6 @@ export default function GeneralLogin() {
         Parent
       </button>
       <button onClick={() => <Link to="/login"></Link>}>Volunteer</button>
-      <button onClick={() => <Link to="/login"></Link>}>Facilitator</button>
     </>
   );
 }

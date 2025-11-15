@@ -25,7 +25,7 @@ export const eventsHC = [
     type: "Event",
     start_location: "Point B",
     end_location: "Point D",
-    date: "2024-06-027",
+    date: "2024-06-27",
     start_time: "10:00 AM",
     end_time: "12:00 PM",
   },
@@ -167,7 +167,7 @@ const students = [
 ];
 
 const events = [
-  { id: 101, title: "STEM Workshop" },
+  { id: 101, title: "STEM Workshop" }, // ChatGPT; title can be diff
   { id: 202, title: "Career Fair" },
   { id: 303, title: "Robotics Expo" },
 ];

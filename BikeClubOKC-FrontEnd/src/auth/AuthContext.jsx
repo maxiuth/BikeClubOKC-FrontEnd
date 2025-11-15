@@ -15,7 +15,18 @@ const API = import.meta.env.VITE_API;
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(null);
+  const [role, setRole] = useState(null);
+  const [userId, serUserId] = useState(null);
+
+  // Helper: safe JSON parsing to avoid "Unexpected end of JSON input"
+  async function safeJson(response) {
+    try {
+      return await response.json();
+    } catch {
+      return {};
+    }
+  }
 
   const register = async (credentials) => {
     const response = await fetch(API + "/users/register", {
@@ -30,22 +41,52 @@ export function AuthProvider({ children }) {
     setToken(result.token);
   };
 
-  const login = async (credentials) => {
-    const response = await fetch(API + "/users/login", {
+  const loginVolunteer = async (credentials) => {
+    const response = await fetch(API + "/users/volunteers/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
     });
-    const result = await response.json();
+    const result = await safeJson(response);
     if (!response.ok) {
-      throw Error(result.message);
+      throw Error(result.message || "Invalid volunteer login");
     }
-    setToken(result.token);
+    setToken(result);
+    setRole("volunteer");
+    serUserId(result.userId);
   };
 
-  const logout = () => setToken(null);
+  const loginParent = async (credentials) => {
+    const response = await fetch(API + "/users/parents/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    });
+    const result = await safeJson(response);
+    if (!response.ok) {
+      throw Error(result.message || "Invalid parent login");
+    }
+    setToken(result);
+    setRole("parent");
+    serUserId(result.userId);
+  };
 
-  const value = { token, register, login, logout };
+  const logout = () => {
+    setToken(null);
+    setRole(null);
+    serUserId(null);
+  };
+
+  const value = {
+    token,
+    role,
+    userId,
+    register,
+    loginVolunteer,
+    loginParent,
+    logout,
+  };
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

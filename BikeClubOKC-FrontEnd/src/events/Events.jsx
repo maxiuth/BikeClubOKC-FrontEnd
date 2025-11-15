@@ -9,7 +9,7 @@ export default function Events() {
 
   const syncEvents = async () => {
     const data = await getEvents();
-    setEvents(data);
+    setEvents([...data]);
   };
 
   useEffect(() => {

@@ -14,17 +14,6 @@ export default function NavBar() {
           <p>Login</p>
         </Link>
         <nav>
-          {/* <NavLink to="/">Books</NavLink>
-          {token ? (
-            <>
-              <NavLink to="/account">Account</NavLink>
-              <a href="#" onClick={logout}>
-                Log out
-              </a>
-            </>
-          ) : (
-            <NavLink to="/login">Login</NavLink>
-          )} */}
           <NavLink to="/facilitator">Facilitator</NavLink>
         </nav>
       </header>
