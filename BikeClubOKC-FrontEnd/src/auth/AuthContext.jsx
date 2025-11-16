@@ -49,11 +49,11 @@ export function AuthProvider({ children }) {
     });
     const result = await safeJson(response);
     if (!response.ok) {
-      throw Error(result.message || "Invalid volunteer login");
+      throw Error(result.message);
     }
     setToken(result);
     setRole("volunteer");
-    serUserId(result.userId);
+    serUserId(result.id);
   };
 
   const loginParent = async (credentials) => {
@@ -64,7 +64,7 @@ export function AuthProvider({ children }) {
     });
     const result = await safeJson(response);
     if (!response.ok) {
-      throw Error(result.message || "Invalid parent login");
+      throw Error(result.message);
     }
     setToken(result);
     setRole("parent");

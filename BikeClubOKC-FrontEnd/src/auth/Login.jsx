@@ -5,7 +5,7 @@ import { useAuth } from "./AuthContext";
 
 /** A form that allows users to log into an existing account. */
 export default function Login() {
-  const { login } = useAuth();
+  const { loginVolunteer } = useAuth();
   const navigate = useNavigate();
 
   const [error, setError] = useState(null);
@@ -16,8 +16,8 @@ export default function Login() {
     const email = formData.get("email");
     const password = formData.get("password");
     try {
-      await login({ email, password });
-      navigate("/events");
+      await loginVolunteer({ email, password });
+      navigate("/volunteers");
     } catch (e) {
       setError(e.message);
     }

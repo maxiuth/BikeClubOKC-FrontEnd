@@ -10,12 +10,9 @@ export default function NavBar() {
         <Link to="/">
           <p>Home</p>
         </Link>
-        <Link to="/login">
+        <Link to="/users/volunteers/login">
           <p>Login</p>
         </Link>
-        <nav>
-          <NavLink to="/facilitator">Facilitator</NavLink>
-        </nav>
       </header>
     </>
   );

@@ -14,7 +14,7 @@ export default function App() {
         <Route path="/" element={<GeneralLogin />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventDetails />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/users/volunteers/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<h1>Error 404 Page Not Found</h1>} />
       </Route>

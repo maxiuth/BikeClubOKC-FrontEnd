@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { createEvent } from "../api/events.js";
 import { eventsHC } from "../api/api.js";
+import { useAuth } from "../auth/AuthContext.jsx";
 
 export default function EventForm({ syncEvents }) {
+  const { token } = useAuth();
   const [error, setError] = useState(null);
 
-  const tryCreateEvent = async (e) => {
-    e.preventDefault();
+  const tryCreateEvent = async (formData) => {
     setError(null);
-
-    const formData = new FormData(e.target);
 
     const event = {
       id: eventsHC.length + 1,
@@ -23,9 +22,9 @@ export default function EventForm({ syncEvents }) {
     };
 
     try {
-      createEvent(event);
+      await createEvent(token, event);
       syncEvents();
-      e.target.reset();
+      // e.target.reset();
     } catch (e) {
       setError(e.message);
     }
@@ -35,7 +34,7 @@ export default function EventForm({ syncEvents }) {
     <>
       <h2>Create a new event for your school</h2>
 
-      <form onSubmit={tryCreateEvent}>
+      <form action={tryCreateEvent}>
         <label>
           Title
           <input type="text" name="title" required />
@@ -76,7 +75,7 @@ export default function EventForm({ syncEvents }) {
           <input type="time" name="end_time" required />
         </label>
 
-        <button type="submit">Create Event</button>
+        <button>Create Event</button>
       </form>
 
       {error && <p role="alert">{error}</p>}
